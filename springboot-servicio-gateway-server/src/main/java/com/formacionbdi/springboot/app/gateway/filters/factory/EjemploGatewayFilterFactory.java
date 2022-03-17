@@ -20,11 +20,6 @@ public class EjemploGatewayFilterFactory
         super(Configuracion.class);
     }
 
-    //GIT
-    //GIT
-    //GIT
-    //GIT
-    //GIT
 
     @Override
     public GatewayFilter apply(Configuracion config) {
