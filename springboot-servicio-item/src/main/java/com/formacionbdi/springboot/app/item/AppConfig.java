@@ -36,7 +36,7 @@ public class AppConfig {
                             // numero de solicitudes de prueba para salir del estado semi abierto
                             .permittedNumberOfCallsInHalfOpenState(5)
                             .build())
-                    .timeLimiterConfig(TimeLimiterConfig.ofDefaults())
+                    .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2L)).build())
                     .build();
         });
     }
