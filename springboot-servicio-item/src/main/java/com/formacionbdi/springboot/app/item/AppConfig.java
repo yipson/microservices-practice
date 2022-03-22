@@ -35,8 +35,12 @@ public class AppConfig {
                             .waitDurationInOpenState(Duration.ofSeconds(10L))
                             // numero de solicitudes de prueba para salir del estado semi abierto
                             .permittedNumberOfCallsInHalfOpenState(5)
+                            // porcentaje de umbral de llamadas lentas
+                            .slowCallRateThreshold(50)
+                            // tiempo maximo de debiese demorar cada llamada particular
+                            .slowCallDurationThreshold(Duration.ofSeconds(2L))
                             .build())
-                    .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2L)).build())
+                    .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(6L)).build())
                     .build();
         });
     }
