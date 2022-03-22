@@ -33,12 +33,19 @@ public class ItemController {
         return itemService.findAll();
     }
 
-    //@HystrixCommand(fallbackMethod = "metodoAlternativo")
     @GetMapping("/ver/{id}/cantidad/{cantidad}")
     public Item detalle(@PathVariable Long id, @PathVariable Integer cantidad){
+        // toma la configuracion de yml y de AppConfig
         return cbFactory.create("items")
                 .run(() -> itemService.findById(id, cantidad),
                         e -> metodoAlternativo(id, cantidad, e));
+    }
+
+    // solo toma la configuracion de yml
+    @CircuitBreaker(name="items", fallbackMethod = "metodoAlternativo")
+    @GetMapping("/ver2/{id}/cantidad/{cantidad}")
+    public Item detalle2(@PathVariable Long id, @PathVariable Integer cantidad){
+        return itemService.findById(id, cantidad);
     }
 
     public Item metodoAlternativo(@PathVariable Long id, @PathVariable Integer cantidad, Throwable e){
