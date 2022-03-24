@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ import java.util.concurrent.CompletableFuture;
 public class ItemController {
 
     private final Logger logger = LoggerFactory.getLogger(ItemController.class);
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     private CircuitBreakerFactory cbFactory;
@@ -105,6 +109,11 @@ public class ItemController {
 
         json.put("texto", texto);
         json.put("puerto", puerto);
+
+        if(env.getActiveProfiles().length > 0 && env.getActiveProfiles()[0].equals("dev")){
+            json.put("autor.nombre", env.getProperty("configuracion.autor.nombre"));
+            json.put("autor.email", env.getProperty("configuracion.autor.email"));
+        }
 
         return new ResponseEntity<Map<String, String>>(json, HttpStatus.OK);
     }
