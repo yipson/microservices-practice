@@ -42,7 +42,7 @@ spring:
           - Path=/api/items/**
         filters:
           - StripPrefix=2
-          - AddRequestHeader=token-request, 123456
+#          - AddRequestHeader=token-request, 123456
           - AddResponseHeader=token-response, 98765
-          - SetResponseHeader=Content-Type, text/plain
+#          - SetResponseHeader=Content-Type, text/plain
           - AddRequestParameter=nombre, andres
