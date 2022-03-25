@@ -30,16 +30,16 @@ public class ItemServiceFeign implements ItemService{
 
     @Override
     public Producto save(Producto producto) {
-        return null;
+        return clienteFeign.crear(producto);
     }
 
     @Override
     public Producto update(Producto producto, Long id) {
-        return null;
+        return clienteFeign.update(producto, id);
     }
 
     @Override
     public void delete(Long id) {
-
+        clienteFeign.eliminar(id);
     }
 }
