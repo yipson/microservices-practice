@@ -11,4 +11,5 @@ public interface IProductoService {
 
     public Producto save(Producto producto);
 
+    public void deleteById(Long id);
 }
