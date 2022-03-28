@@ -21,7 +21,7 @@ public class Usuario implements Serializable {
     private String nombre;
     private String apellido;
 
-    @Column(uniue = true, length = 80)
+    @Column(unique = true, length = 80)
     private String email;
 
     public Long getId() {
