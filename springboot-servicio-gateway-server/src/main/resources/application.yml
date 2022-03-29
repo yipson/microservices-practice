@@ -46,3 +46,10 @@ spring:
           - AddResponseHeader=token-response, 98765
 #          - SetResponseHeader=Content-Type, text/plain
           - AddRequestParameter=nombre, andres
+
+      - id: servicio-usuarios
+        uri: lb://servicio-usuarios
+        predicates:
+          - Path=/api/usuarios/**
+        filters:
+          - StripPrefix=2
