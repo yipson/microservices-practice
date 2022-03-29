@@ -1,6 +1,6 @@
 package com.formacionbdi.springboot.app.usuarios.models.dao;
 
-import com.formacionbdi.springboot.app.usuarios.models.entity.Usuario;
+import com.formacionbdi.springboot.app.commons.usuarios.models.entity.Usuario;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
