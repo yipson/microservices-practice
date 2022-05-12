@@ -12,7 +12,7 @@ public interface UsuarioDao extends PagingAndSortingRepository<Usuario, Long> {
 
     // Personalizar nombre del endpoint
     @RestResource(path="buscar-username")
-    public Usuario findByUsername(@Param("nombre") String username);
+    public Usuario findByUsername(@Param("username") String username);
 
     // Personalizar consultas con JPQL
     @Query("select u from Usuario u where u.username=?1")
