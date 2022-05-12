@@ -23,6 +23,8 @@ spring:
   cloud:
     gateway:
       routes:
+
+      # PRODUCTOS
       - id: servicio-productos
         uri: lb://servicio-productos
         predicates:
@@ -36,6 +38,7 @@ spring:
           - StripPrefix=2
           - EjemploCookie=Mensaje personalizado, usuario, AndresGuzman
 
+      # ITEMS
       - id: servicio-items
         uri: lb://servicio-items
         predicates:
@@ -47,9 +50,18 @@ spring:
 #          - SetResponseHeader=Content-Type, text/plain
           - AddRequestParameter=nombre, andres
 
+      # USUARIOS
       - id: servicio-usuarios
         uri: lb://servicio-usuarios
         predicates:
           - Path=/api/usuarios/**
         filters:
           - StripPrefix=2
+
+      # OAUTH
+      - id: servicio-oauth
+          uri: lb://servicio-oauth
+          predicates:
+            - Path=/api/security/**
+          filters:
+            - StripPrefix=2
