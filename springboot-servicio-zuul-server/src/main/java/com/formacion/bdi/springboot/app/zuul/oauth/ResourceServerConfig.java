@@ -26,7 +26,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,
                         "/api/productos/listar",
                         "/api/items/listar",
-                        "/api/usuarios/usuarios/").permitAll()
+                        "/api/usuarios/usuarios").permitAll()
                 .antMatchers(HttpMethod.GET,
                         "/api/productos/ver/{id}",
                         "/api/items/ver/{id}/cantidad/{cantidad}",
@@ -34,7 +34,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,
                         "/api/productos/crear",
                         "/api/items/crear",
-                        "/api/usuarios/usuarios/").hasRole("ADMIN")
+                        "/api/usuarios/usuarios").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT,
                         "/api/productos/editar/{id}",
                         "/api/items/editar/{id}",
