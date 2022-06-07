@@ -37,7 +37,7 @@ public class ProductoController {
     @GetMapping("/ver/{id}")
     public Producto detalle(@PathVariable Long id) throws InterruptedException {
 
-        if(id.equals(10L)){
+        if(id.equals(100L)){
             throw new IllegalStateException("Producto no encontrado");
         }
 
