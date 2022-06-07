@@ -1,6 +1,7 @@
 package com.formacionbdi.springboot.app.gateway.security;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 @Component
 public class AuthenticationManagerJwt implements ReactiveAuthenticationManager {
 
-    @Value("${}config.security.oauth.jwt.key")
+    @Value("${config.security.oauth.jwt.key}")
     private String llaveJwt;
 
     @Override
