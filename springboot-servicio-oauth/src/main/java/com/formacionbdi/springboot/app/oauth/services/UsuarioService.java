@@ -1,5 +1,6 @@
 package com.formacionbdi.springboot.app.oauth.services;
 
+import brave.Tracer;
 import com.formacionbdi.springboot.app.commons.usuarios.models.entity.Usuario;
 import com.formacionbdi.springboot.app.oauth.clients.UsuarioFeignClient;
 import feign.FeignException;
@@ -25,6 +26,9 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {
     @Autowired
     private UsuarioFeignClient client;
 
+    @Autowired
+    private Tracer tracer;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -45,7 +49,12 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {
                     true, authorities);
 
         } catch(FeignException e){
-            log.error("Error en el login, no existe usuario '"+username+"' en el sistema");
+            String error = "Error en el login, no existe usuario '"+username+"' en el sistema";
+            log.error(error);
+
+            tracer.currentSpan().tag("error.mensaje", error + ": " +
+                    e.getMessage());
+
             throw new UsernameNotFoundException("Error en el login, no existe usuario '"
                     +username+"' en el sistema");
         }
