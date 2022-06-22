@@ -1,0 +1,62 @@
+version: '3.7'
+services:
+  config-server:
+    image: config-server:v1
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - "microservices-practice"
+  eureka-server:
+    image: eureka-server:v1
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - "microservices-practice"
+  mysql-service:
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    restart: always
+    networks:
+      - "microservices-practice"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: db_springboot_cloud
+  servicio-productos:
+    image: servicio-productos:v1
+    restart: always
+    networks:
+      - "microservices-practice"
+    depends_on:
+      - config-server
+      - eureka-server
+      - mysql-service
+  servicio-item:
+    image: servicio-item:v1
+    ports:
+      - "8002:8002"
+      - "8005:8005"
+      - "8007:8007"
+    restart: always
+    networks:
+      - "microservices-practice"
+    depends_on:
+      - config-server
+      - eureka-server
+      - servicio-productos
+  servicio-gateway:
+    image: servicio-gateway:v1
+    ports:
+      - "8090:8090"
+    restart: always
+    networks:
+      - "microservices-practice"
+    depends_on:
+      - config-server
+      - eureka-server
+      - servicio-productos
+      - servicio-item
+networks:
+  microservices-practice:
